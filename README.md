@@ -44,11 +44,13 @@ NODE_ENV=production          # Environment (development, staging, production)
 ## Endpoints
 
 ### WebSocket Endpoint
+
 - **URL**: `ws://localhost:1234/{documentName}`
 - **Protocol**: Yjs WebSocket Protocol
 - **Usage**: Connect Yjs clients to sync documents
 
 ### Health Check
+
 - **URL**: `http://localhost:1234/health`
 - **Method**: GET
 - **Response**:
@@ -75,6 +77,7 @@ NODE_ENV=production          # Environment (development, staging, production)
 4. Deploy!
 
 Railway will automatically:
+
 - Install dependencies
 - Run `npm start`
 - Provide a public URL
@@ -131,31 +134,31 @@ CMD ["npm", "start"]
 ### React + Yjs
 
 ```typescript
-import * as Y from 'yjs'
-import { WebsocketProvider } from 'y-websocket'
+import * as Y from "yjs";
+import { WebsocketProvider } from "y-websocket";
 
-const ydoc = new Y.Doc()
+const ydoc = new Y.Doc();
 
 const provider = new WebsocketProvider(
-  'ws://localhost:1234',
-  'my-diagram-id',
-  ydoc
-)
+  "ws://localhost:1234",
+  "my-diagram-id",
+  ydoc,
+);
 
-provider.on('status', ({ status }) => {
-  console.log('Connection status:', status) // 'connected' | 'disconnected'
-})
+provider.on("status", ({ status }) => {
+  console.log("Connection status:", status); // 'connected' | 'disconnected'
+});
 
-const yNodes = ydoc.getArray('nodes')
+const yNodes = ydoc.getArray("nodes");
 yNodes.observe(() => {
   // React to changes
-  console.log('Nodes updated:', yNodes.toArray())
-})
+  console.log("Nodes updated:", yNodes.toArray());
+});
 
 // Make changes
 ydoc.transact(() => {
-  yNodes.push([{ id: '1', type: 'server', label: 'API' }])
-})
+  yNodes.push([{ id: "1", type: "server", label: "API" }]);
+});
 ```
 
 ## Monitoring
@@ -163,6 +166,7 @@ ydoc.transact(() => {
 ### Logs
 
 The server logs important events:
+
 - New connections
 - Connection closures
 - Errors
@@ -171,6 +175,7 @@ The server logs important events:
 ### Health Check
 
 Use the `/health` endpoint for monitoring:
+
 ```bash
 curl http://localhost:1234/health
 ```
@@ -178,6 +183,7 @@ curl http://localhost:1234/health
 ### Production Monitoring
 
 Recommended tools:
+
 - **Railway Metrics**: Built-in monitoring
 - **Datadog**: Application performance monitoring
 - **Sentry**: Error tracking
@@ -219,19 +225,22 @@ Recommended tools:
 ### Connection Issues
 
 **Problem**: Clients can't connect
-**Solution**: 
+**Solution**:
+
 - Check firewall settings
 - Verify PORT environment variable
 - Check Railway logs
 
 **Problem**: High memory usage
 **Solution**:
+
 - Implement document cleanup for inactive sessions
 - Add persistence layer to offload old documents
 - Monitor with `/health` endpoint
 
 **Problem**: Slow synchronization
 **Solution**:
+
 - Check network latency
 - Verify document size (consider splitting large documents)
 - Monitor server CPU usage
@@ -259,6 +268,7 @@ MIT
 ## Support
 
 For issues or questions:
+
 1. Check server logs
 2. Verify health endpoint
 3. Review Yjs documentation
