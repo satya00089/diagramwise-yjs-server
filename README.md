@@ -1,6 +1,6 @@
-# Diagrammatic Yjs Server
+# Diagramwise Yjs Server
 
-Real-time collaboration server for Diagrammatic using Yjs CRDT and WebSocket.
+Real-time collaboration server for Diagramwise using Yjs CRDT and WebSocket.
 
 ## Features
 
